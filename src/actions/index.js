@@ -71,3 +71,23 @@ export const getUrl = (slug) => async (dispatch, getState) => {
     });
   }
 };
+
+export const LOAD_URLS_SUCCESS = "LOAD_URLS_SUCCESS";
+export const LOAD_URLS_FAILURE = "LOAD_URLS_FAILURE";
+export const loadUrls = () => async (dispatch) => {
+  const response = await fetch("http://localhost:3000/urls?limit=100");
+  if (response.ok) {
+    const { data } = await response.json();
+
+    const urlList = data.urls;
+
+    return dispatch({
+      type: LOAD_URLS_SUCCESS,
+      payload: { urlList },
+    });
+  } else {
+    return dispatch({
+      type: LOAD_URLS_FAILURE,
+    });
+  }
+};

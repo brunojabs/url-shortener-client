@@ -31,6 +31,19 @@ const reducer = (state = { inputValue: "", isLoading: false }, action) => {
       window.location.assign(action.payload.target);
 
       break;
+    case actions.LOAD_URLS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        urlList: action.payload.urlList,
+      };
+
+    case actions.LOAD_URLS_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: "Could not fetch the list. Try again later",
+      };
     default:
       return state;
   }
