@@ -26,13 +26,18 @@ const Home = (props) => {
 
 const Input = ({ inputValue, handleChange, onClick, error }) => (
   <>
-    <div>
+    <div className="uk-flex-inline">
       <input
         type="text"
         value={inputValue}
         onChange={(event) => handleChange(event.target.value)}
+        className={`uk-input uk-form-width-medium ${
+          error ? "uk-form-danger" : ""
+        }`}
       />
-      <button onClick={onClick}>Create</button>
+      <button onClick={onClick} className="uk-input">
+        Create
+      </button>
     </div>
     <div>{error}</div>
   </>

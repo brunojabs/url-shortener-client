@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { loadUrls } from "../actions";
+import slugToUrl from "../helpers/slugToUrl";
 
 class Top extends Component {
   componentDidMount() {
@@ -13,7 +14,7 @@ class Top extends Component {
 
     return (
       <div className="home--container">
-        <h2 className="home--title">Top Urls</h2>
+        <h2 className="home--title">Top 100 URL's</h2>
         {isLoading ? (
           <div>Loading...</div>
         ) : (
@@ -27,20 +28,37 @@ class Top extends Component {
 }
 
 const UrlList = ({ urlList }) => (
-  <ul>
-    {urlList.map((url) => (
-      <UrlListItem url={url} />
-    ))}
-  </ul>
+  <table class="uk-table uk-table-striped">
+    <caption></caption>
+    <thead>
+      <tr>
+        <th>Short Url</th>
+        <th>Target</th>
+        <th>Hits Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      {urlList.map((url) => (
+        <UrlListItem {...url} />
+      ))}
+    </tbody>
+  </table>
 );
 
-const UrlListItem = ({ url }) => (
-  <li>
-    Slug: {url.slug}
-    <br /> Target: {url.target}
-    <br /> Hits: {url.hits}
-  </li>
-);
+const UrlListItem = ({ slug, target, hits }) => {
+  const url = slugToUrl({ location: window.location, slug: slug });
+  return (
+    <tr>
+      <td>
+        <a href={url}>{url}</a>
+      </td>
+      <td>
+        <a href={target}>{target}</a>
+      </td>
+      <td>{hits}</td>
+    </tr>
+  );
+};
 
 Top.propTypes = {
   urlList: PropTypes.array,

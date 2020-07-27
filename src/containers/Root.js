@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Home from "../containers/Home";
 import Redirect from "../containers/Redirect";
 import Top from "../containers/Top";

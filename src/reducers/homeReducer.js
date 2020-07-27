@@ -1,4 +1,5 @@
 import * as actions from "../actions";
+import slugToUrl from "../helpers/slugToUrl";
 
 const homeInitialState = { inputValue: "", isLoading: false };
 const homeReducer = (state = homeInitialState, action) => {
@@ -10,7 +11,7 @@ const homeReducer = (state = homeInitialState, action) => {
     case actions.CREATE_URL_SUCCESS:
       const url = action.payload.data.url;
 
-      const shortUrl = `${window.location.protocol}//${window.location.host}/${url.slug}`;
+      const shortUrl = slugToUrl({ location: window.location, slug: url.slug });
 
       return { ...state, isLoading: false, shortUrl: shortUrl, error: null };
     case actions.CREATE_URL_FAILURE:
