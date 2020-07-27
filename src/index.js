@@ -6,7 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import Root from "./containers/Root";
 import configureStore from "./store/configureStore";
 
-const store = configureStore({ isLoading: true });
+const store = configureStore();
 
 render(
   <Router>

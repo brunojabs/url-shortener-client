@@ -19,7 +19,7 @@ export const createUrl = () => async (dispatch, getState) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ data: { target: getState().inputValue } }),
+    body: JSON.stringify({ data: { target: getState().home.inputValue } }),
   });
 
   return dispatch(urlCreated(response));
@@ -53,7 +53,7 @@ export const getUrl = (slug) => async (dispatch, getState) => {
     const res = await response.json();
     const url = res.data.url;
 
-    await fetch(`http://localhost:3000/urls/${slug.slug}/hit`, {
+    await fetch(`http://localhost:3000/urls/${url.slug}/hit`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

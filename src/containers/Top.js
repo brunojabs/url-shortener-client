@@ -48,8 +48,7 @@ Top.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  urlList: state.urlList,
-  isLoading: state.isLoading,
+  ...state.top,
 });
 
 export default withRouter(

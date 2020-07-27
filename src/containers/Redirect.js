@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withRouter, useParams } from "react-router-dom";
-import { connect, useDispatch } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import { getUrl } from "../actions";
 
 class Redirect extends Component {
@@ -9,13 +8,8 @@ class Redirect extends Component {
     this.props.getUrl(this.props.match.params.slug);
   }
   render() {
-    return <div>Redirecting.. </div>;
+    return <div>Redirecting...</div>;
   }
 }
-
-Redirect.propTypes = {
-  store: PropTypes.object.isRequired,
-  askForSlug: PropTypes.func,
-};
 
 export default withRouter(connect(() => {}, { getUrl: getUrl })(Redirect));
