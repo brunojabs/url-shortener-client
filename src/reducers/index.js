@@ -27,6 +27,10 @@ const reducer = (state = { inputValue: "", isLoading: false }, action) => {
             "Something went wrong and it was not possible to create. Try again please",
         };
       }
+    case actions.REDIRECT_TO:
+      window.location.assign(action.payload.target);
+
+      break;
     default:
       return state;
   }

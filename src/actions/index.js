@@ -44,3 +44,30 @@ export const urlCreated = (response) => async (dispatch, getState) => {
     });
   }
 };
+export const REDIRECT_TO = "REDIRECT_TO";
+
+export const getUrl = (slug) => async (dispatch, getState) => {
+  const response = await fetch(`http://localhost:3000/urls/${slug}`);
+
+  if (response.ok) {
+    const res = await response.json();
+    const url = res.data.url;
+
+    await fetch(`http://localhost:3000/urls/${slug.slug}/hit`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return dispatch({
+      type: REDIRECT_TO,
+      payload: { target: url.target },
+    });
+  } else {
+    return dispatch({
+      type: REDIRECT_TO,
+      payload: { target: "/" },
+    });
+  }
+};
