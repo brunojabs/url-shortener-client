@@ -1,3 +1,5 @@
+import { SERVER_URL } from "../constants";
+
 export const INPUT_CHANGED = "INPUT_CHANGED";
 export const inputChanged = (value) => (dispatch, getState) => {
   return dispatch({
@@ -14,7 +16,7 @@ export const createUrl = () => async (dispatch, getState) => {
     type: CREATE_URL_REQUESTED,
   });
 
-  const response = await fetch("http://localhost:3000/urls", {
+  const response = await fetch(`${SERVER_URL}/urls`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -47,13 +49,13 @@ export const urlCreated = (response) => async (dispatch, getState) => {
 export const REDIRECT_TO = "REDIRECT_TO";
 
 export const getUrl = (slug) => async (dispatch, getState) => {
-  const response = await fetch(`http://localhost:3000/urls/${slug}`);
+  const response = await fetch(`${SERVER_URL}/urls/${slug}`);
 
   if (response.ok) {
     const res = await response.json();
     const url = res.data.url;
 
-    await fetch(`http://localhost:3000/urls/${url.slug}/hit`, {
+    await fetch(`${SERVER_URL}/urls/${url.slug}/hit`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +77,7 @@ export const getUrl = (slug) => async (dispatch, getState) => {
 export const LOAD_URLS_SUCCESS = "LOAD_URLS_SUCCESS";
 export const LOAD_URLS_FAILURE = "LOAD_URLS_FAILURE";
 export const loadUrls = () => async (dispatch) => {
-  const response = await fetch("http://localhost:3000/urls?limit=100");
+  const response = await fetch(`${SERVER_URL}/urls?limit=100`);
   if (response.ok) {
     const { data } = await response.json();
 
