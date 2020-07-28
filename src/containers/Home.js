@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { inputChanged, createUrl } from "../actions";
 
 const Home = (props) => {
@@ -9,7 +9,7 @@ const Home = (props) => {
 
   return (
     <div className="home--container">
-      <h2 className="home--title">URL Shorteneter</h2>
+      <h2 className="home--title">URL Shortener</h2>
       <h3>
         Paste the url you want to make short on the input bellow and hit
         'Create'
@@ -40,6 +40,7 @@ const Input = ({ inputValue, handleChange, onClick, error }) => (
       </button>
     </div>
     <div>{error}</div>
+    <Link to="/top">Check the top 100 URLs</Link>
   </>
 );
 
